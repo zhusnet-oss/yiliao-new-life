@@ -1,0 +1,15 @@
+# Local previews, QA captures, and logs
+*.log
+qa-*.png
+current-live-site.png
+
+# Generated and temporary files
+__pycache__/
+outputs/
+*.zip
+~$*.pptx
+*.pptx
+
+# Local utilities and delivery notes
+*.py
+交付说明.md
