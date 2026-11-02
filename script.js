@@ -33,8 +33,25 @@ imageInput?.addEventListener("change", () => {
   });
 });
 
-workForm?.addEventListener("submit", (event) => {
+workForm?.addEventListener("submit", async (event) => {
   event.preventDefault();
-  formStatus.textContent = "作品信息已填写完成。正式发布前还需要接入文件存储服务。";
-  formStatus.classList.add("is-ready");
+  formStatus.textContent = "正在提交…";
+  formStatus.classList.remove("is-ready", "is-error");
+
+  try {
+    const response = await fetch("/", {
+      method: "POST",
+      body: new FormData(workForm),
+    });
+    if (!response.ok) throw new Error(String(response.status));
+    formStatus.textContent = "提交成功！老师会在后台看到你的作品。";
+    formStatus.classList.add("is-ready");
+    workForm.reset();
+    imagePreview.replaceChildren();
+    previewUrls.forEach((url) => URL.revokeObjectURL(url));
+    previewUrls = [];
+  } catch (error) {
+    formStatus.textContent = "提交失败，请稍后重试或联系老师。";
+    formStatus.classList.add("is-error");
+  }
 });

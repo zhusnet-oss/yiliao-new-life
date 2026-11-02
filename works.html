@@ -167,7 +167,19 @@
           <h2>上传你的衣料新生成果</h2>
           <p>填写作品信息并选择图片，记录旧衣来源、拼布方案、刺绣过程和完成作品。</p>
         </div>
-        <form class="work-form" data-work-form>
+        <form
+          class="work-form"
+          name="student-work"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          enctype="multipart/form-data"
+          data-work-form
+        >
+          <input type="hidden" name="form-name" value="student-work" />
+          <p hidden>
+            <label>别填：<input name="bot-field" /></label>
+          </p>
           <div class="form-fields">
             <label>
               <span>作品名称</span>
@@ -189,7 +201,7 @@
 
           <label class="upload-field">
             <span class="upload-title">选择作品图片</span>
-            <span class="upload-note">可选择多张 JPG、PNG 或 WebP 图片</span>
+            <span class="upload-note">可选择多张 JPG、PNG 或 WebP（单文件建议不超过 10MB）</span>
             <input type="file" name="work_images" accept="image/jpeg,image/png,image/webp" multiple required data-image-input />
           </label>
 
@@ -197,7 +209,7 @@
 
           <div class="form-actions">
             <button class="button primary" type="submit">提交作品</button>
-            <p class="form-status" data-form-status aria-live="polite">当前为页面预览，发布时接入作品存储后即可正式提交。</p>
+            <p class="form-status" data-form-status aria-live="polite"></p>
           </div>
         </form>
       </section>
